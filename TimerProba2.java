@@ -3,63 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package catstreet;
 
-import java.awt.Point;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Timer;
-import java.util.TimerTask;
-
 
 /**
- *
  * @author wildf
  */
-public class TimerProba2 extends javax.swing.JFrame implements ActionListener{
-    int secondpassed=0;
-      Timer timer;
-    
- TimerTask task=new TimerTask() {
-         @Override
-         public void run() {
-             secondpassed++;
-             System.out.println("second passed:"+secondpassed);
-              
-          do{
-               int leptek = 8;
-        for (int i = 0; i < 5; i++) {
-             
+public class TimerProba2 extends javax.swing.JFrame implements ActionListener {
 
-            Point helybalmacska = c1.getLocation();
-            Point helyjobmacska = c2.getLocation();
-            helybalmacska.x += leptek;
-            helyjobmacska.x -= leptek;
-            c1.setLocation(helybalmacska);
-            c2.setLocation(helyjobmacska);
-            
-        }
-              
-          }while(secondpassed==5);
-          
-         }
-     };
- 
- public void start(){
-  
-          timer = new Timer();
-          timer.scheduleAtFixedRate(task, 0, 250);
-   timer.purge();
-    
-    
- }
+    // Nem igazán értem, hogy ez a változó mire jó
+    private int secondPassed = 0;
+
     /**
      * Creates new form TimerProba2
      */
     public TimerProba2() {
         initComponents();
         jButton1.addActionListener(this);
-      
     }
 
     /**
@@ -88,28 +51,28 @@ public class TimerProba2 extends javax.swing.JFrame implements ActionListener{
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(462, 462, 462)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(489, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(94, 94, 94)
-                .addComponent(c1, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(c2, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(75, 75, 75))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(462, 462, 462)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(489, Short.MAX_VALUE))
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(94, 94, 94)
+                                .addComponent(c1, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(c2, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(75, 75, 75))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 286, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(c1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(c2, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(64, 64, 64))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(57, 57, 57)
+                                .addComponent(jButton1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 286, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(c1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(c2, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(64, 64, 64))
         );
 
         pack();
@@ -122,7 +85,7 @@ public class TimerProba2 extends javax.swing.JFrame implements ActionListener{
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -156,47 +119,39 @@ public class TimerProba2 extends javax.swing.JFrame implements ActionListener{
     private javax.swing.JButton jButton1;
     // End of variables declaration//GEN-END:variables
 
+    class AnswerWorker extends SwingWorker<Integer, Integer> {
+
+        protected Integer doInBackground() throws Exception {
+            do {
+                System.out.println("second passed:" + secondPassed);
+                int leptek = 8;
+                for (int i = 0; i < 5; i++) {
+                    Point helybalmacska = c1.getLocation();
+                    Point helyjobmacska = c2.getLocation();
+                    helybalmacska.x += leptek;
+                    helyjobmacska.x -= leptek;
+                    c1.setLocation(helybalmacska);
+                    c2.setLocation(helyjobmacska);
+                }
+                Thread.sleep(1000);
+                secondPassed++;
+            } while (secondPassed != 5);
+            return secondPassed; // a visszaadott eredményt a get() metódussal lehet elérni, amikor végzett a szál (done() metódusban)
+        }
+
+        protected void done() {
+            try {
+                JOptionPane.showMessageDialog(new Frame(),
+                        "Worker has successfully completed the job! secondPassed = " + get()); // itt kérem vissza az eredményt
+                secondPassed = 0;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
-//        if(e.getSource()==jButton1){
-//           jButton1.setText("támadás!");
-//           start();  
-//        }else if(jButton1.getText().equals("támadás!")){
-//            jButton1.setText("jButton");
-////           Timer timer2=new Timer();
-////           timer2.scheduleAtFixedRate(task, 0, 300);
-           start();
-//            timer.cancel();
-//            task.cancel();
-//           timer.purge();
-//           timer.purge();
-//           repaint();
-        }
-      
-//      https://stackoverflow.com/questions/21682031/i-cant-start-a-timer-2-times
-        
-       
-//        if(e.getSource()==jButton1){
-//             int leptek = 8;
-////        for (int i = 0; i < 10; i++) {
-//             
-////            timer.setDelay(500);
-//           
-////            System.out.println("timer" + i);
-//            Point helybalmacska = c1.getLocation();
-//            Point helyjobmacska = c2.getLocation();
-//
-//            helybalmacska.x += leptek;
-//            helyjobmacska.x -= leptek;
-//            
-//            
-//            
-//            c1.setLocation(helybalmacska);
-//            c2.setLocation(helyjobmacska);
-            
-//        }
-//    }
+        new AnswerWorker().execute();
+    }
 }
-  
-
-
